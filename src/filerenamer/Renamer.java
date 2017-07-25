@@ -14,46 +14,49 @@ import javax.swing.JOptionPane;
 public class Renamer
 {
 
+    static int question = JOptionPane.QUESTION_MESSAGE;
+    static int warning = JOptionPane.WARNING_MESSAGE;
+    static int error = JOptionPane.ERROR_MESSAGE;
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args)
     {
-
         FileRenamer fr = new FileRenamer();
         SeriesRenamer sr = new SeriesRenamer();
         CharacterCheck c = new CharacterCheck();
         String result = "";
 
-        String folderName = JOptionPane.showInputDialog(null, "Please enter folder path", "Folder path", JOptionPane.QUESTION_MESSAGE);
+        String folderName = JOptionPane.showInputDialog(null, "Please enter folder path", "Folder path", question);
         if (!folderName.substring(folderName.length() - 2).equals("\\"))
         {
             folderName += "\\";
         }
 
-        String series = JOptionPane.showInputDialog(null, "Is this a series folder? (YES / NO)", "Series folder", JOptionPane.QUESTION_MESSAGE);
+        String series = JOptionPane.showInputDialog(null, "Is this a series folder? (YES / NO)", "Series folder", question);
         while (!series.toUpperCase().contains("YES") && !series.toUpperCase().contains("NO"))
         {
-            JOptionPane.showMessageDialog(null, "Please enter \'YES\' or \'NO\'", "Invalid", JOptionPane.WARNING_MESSAGE);
-            series = JOptionPane.showInputDialog(null, "Is this a series folder? (YES / NO)", "Series folder", JOptionPane.QUESTION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please enter \'YES\' or \'NO\'", "Invalid", warning);
+            series = JOptionPane.showInputDialog(null, "Is this a series folder? (YES / NO)", "Series folder", question);
         }
 
         if (series.toUpperCase().equals("NO"))
         {
-            String replaceFrom = JOptionPane.showInputDialog(null, "Please enter the character you wish to replace", "Character to replace", JOptionPane.QUESTION_MESSAGE);
+            String replaceFrom = JOptionPane.showInputDialog(null, "Please enter the character you wish to replace", "Character to replace", question);
 
-            String replaceWith = JOptionPane.showInputDialog(null, "Please enter the character you wish to replace with", "Character to replace with", JOptionPane.QUESTION_MESSAGE);
+            String replaceWith = JOptionPane.showInputDialog(null, "Please enter the character you wish to replace with", "Character to replace with", question);
             while (c.checkProhibitedCharacters(replaceWith))
             {
-                JOptionPane.showMessageDialog(null, "A file name cannot contain " + replaceWith, "Invalid", JOptionPane.ERROR_MESSAGE);
-                replaceWith = JOptionPane.showInputDialog(null, "Please enter the character you wish to replace with", "Character to replace with", JOptionPane.QUESTION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "A file name cannot contain " + replaceWith, "Invalid", error);
+                replaceWith = JOptionPane.showInputDialog(null, "Please enter the character you wish to replace with", "Character to replace with", question);
             }
 
-            String removeNumbers = JOptionPane.showInputDialog(null, "Remove numbers from name? (YES / NO)", "Remove numbers", JOptionPane.QUESTION_MESSAGE);
+            String removeNumbers = JOptionPane.showInputDialog(null, "Remove numbers from name? (YES / NO)", "Remove numbers", question);
             while (!removeNumbers.toUpperCase().contains("YES") && !removeNumbers.toUpperCase().contains("NO"))
             {
-                JOptionPane.showMessageDialog(null, "Please enter \'YES\' or \'NO\'", "Invalid", JOptionPane.ERROR_MESSAGE);
-                removeNumbers = JOptionPane.showInputDialog(null, "Remove numbers from name? (YES / NO)", "Remove numbers", JOptionPane.QUESTION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please enter \'YES\' or \'NO\'", "Invalid", warning);
+                removeNumbers = JOptionPane.showInputDialog(null, "Remove numbers from name? (YES / NO)", "Remove numbers", question);
             }
 
             if (c.isBracket(replaceFrom))
